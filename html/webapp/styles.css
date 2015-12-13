@@ -1,0 +1,9 @@
+canvas {
+    cursor: default;
+    outline: none;
+}
+
+body {
+    background-color: #222222;
+    margin: 0;
+}
