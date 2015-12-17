@@ -9,11 +9,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.physics.box2d.Box2D;
+import djarroba.ludumdare34.level.Level;
+import djarroba.ludumdare34.level.MapManager;
+import djarroba.ludumdare34.screens.GameScreen;
 import djarroba.ludumdare34.screens.MenuScreen;
 
 public class MyGame extends Game {
 
 	public AssetManager assets;
+	public MapManager mapManager;
 
 	@Override
 	public void create () {
@@ -40,13 +44,34 @@ public class MyGame extends Game {
 		assets.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
 
 		assets.load("levels/level1.tmx", TiledMap.class);
+		assets.load("levels/level2.tmx", TiledMap.class);
+		assets.load("levels/level3.tmx", TiledMap.class);
+		assets.load("levels/level4.tmx", TiledMap.class);
+		assets.load("levels/level5.tmx", TiledMap.class);
+		assets.load("levels/level10.tmx", TiledMap.class);
 
 		assets.finishLoading();
+
+		mapManager = new MapManager(this);
+		// Load the actual levels into the MapManager
+		mapManager.add(assets.get("levels/level1.tmx", TiledMap.class));
+		mapManager.add(assets.get("levels/level2.tmx", TiledMap.class));
+		mapManager.add(assets.get("levels/level3.tmx", TiledMap.class));
+		mapManager.add(assets.get("levels/level4.tmx", TiledMap.class));
+		mapManager.add(assets.get("levels/level5.tmx", TiledMap.class));
+		mapManager.add(assets.get("levels/level10.tmx", TiledMap.class));
 
 
 		Box2D.init();
 
-		setScreen(new MenuScreen(this));
+		setScreen(new GameScreen(this, mapManager.getMaps().get(0)));
+	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		getScreen().dispose();
+		assets.dispose();
 	}
 
 }

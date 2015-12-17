@@ -59,4 +59,12 @@ public class EntityManager {
 		entitiesToRemove.add(entity);
 	}
 
+	public void removeAll() {
+		for(Entity entity : entities) {
+			if(!entitiesToRemove.contains(entity)) {
+				remove(entity);
+			}
+		}
+	}
+
 }

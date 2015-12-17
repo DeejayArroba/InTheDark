@@ -13,30 +13,27 @@
  </tileset>
  <tileset firstgid="3" name="tileset" tilewidth="16" tileheight="16" tilecount="64">
   <image source="../tileset.png" width="128" height="128"/>
-  <terraintypes>
-   <terrain name="Walls" tile="-1"/>
-  </terraintypes>
-  <tile id="0" terrain="0,0,0,">
+  <tile id="0">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="1" terrain="0,0,,">
+  <tile id="1">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="2" terrain="0,0,,0">
+  <tile id="2">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="3" terrain=",,,0">
+  <tile id="3">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="4" terrain=",,0,">
+  <tile id="4">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
@@ -56,7 +53,7 @@
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="8" terrain="0,,0,">
+  <tile id="8">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
@@ -66,17 +63,17 @@
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="10" terrain=",0,,0">
+  <tile id="10">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="11" terrain=",0,,">
+  <tile id="11">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="12" terrain="0,,,">
+  <tile id="12">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
@@ -86,17 +83,17 @@
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="16" terrain="0,,0,0">
+  <tile id="16">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="17" terrain=",,0,0">
+  <tile id="17">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
   </tile>
-  <tile id="18" terrain=",0,0,0">
+  <tile id="18">
    <properties>
     <property name="blocked" value="true"/>
    </properties>
@@ -134,26 +131,35 @@
  </tileset>
  <layer name="Background" width="16" height="9">
   <data encoding="base64">
-   DAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAA
+   AgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAIAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAIAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAAAgAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAAAgAAAAIAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAA
   </data>
  </layer>
  <layer name="Walls" width="16" height="9">
   <data encoding="base64">
-   FgAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAFwAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAgAAAAFwAAAAAAAAAYAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABYAAAAgAAAAFwAAAAAAAAAAAAAAAAAAABAAAAAAAAAAGAAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAYAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAGAAAAAAAAAAeAAAAIAAAAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAeAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAfAAAA
+   FgAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAFwAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAYAAAAAAAAABYAAAAKAAAAAAAAAAgAAAAAAAAAFgAAACAAAAAgAAAACgAAAAAAAAAJAAAACgAAAAAAAAAYAAAAGAAAAAAAAAAYAAAAAAAAAAAAAAAYAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAABgAAAAAAAAAEAAAAAAAAAAJAAAAHwAAAAAAAAAAAAAAAAAAAAkAAAAgAAAACgAAAAAAAAAIAAAAAAAAABgAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAYAAAAGAAAAAAAAAAJAAAAIAAAACAAAAAKAAAAAAAAAB4AAAAKAAAAAAAAAAkAAAAgAAAAIAAAAB8AAAAAAAAAGAAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAeAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAfAAAA
   </data>
  </layer>
  <objectgroup name="Dots">
-  <object id="32" x="36.75" y="117.5" width="6.25" height="6.75">
+  <object id="32" x="54.75" y="56.25" width="2" height="2">
+   <properties>
+    <property name="color" value="red"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="34" x="133" y="69.5" width="6" height="6.5">
+  <object id="34" x="183.25" y="55.75" width="0.75" height="1.75">
+   <properties>
+    <property name="color" value="green"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="35" x="229.5" y="37" width="6.25" height="6.75">
+  <object id="35" x="232.75" y="103" width="0.75" height="1.75">
+   <properties>
+    <property name="color" value="red"/>
+   </properties>
    <ellipse/>
   </object>
  </objectgroup>
  <objectgroup name="Spawn">
-  <object id="30" x="54.25" y="41.25" width="1.5" height="1.25"/>
+  <object id="30" x="119.25" y="73" width="1.5" height="1.25"/>
  </objectgroup>
 </map>

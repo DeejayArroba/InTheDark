@@ -6,10 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import djarroba.ludumdare34.screens.GameScreen;
 
-public class Hud {
+public class Hud implements Disposable {
 
 	GameScreen screen;
 
@@ -19,14 +20,16 @@ public class Hud {
 	Skin skin;
 
 	Table table;
+	Table midTable;
 	public Label dotsLeftLabel;
+	public Label levelLabel;
+	public Label timeLabel;
 	public Label winLoseLabel;
 
 	public Hud(GameScreen screen) {
 		this.screen = screen;
 
-
-		viewport = new FitViewport(16, 9, screen.camera);
+		viewport = new FitViewport(16, 9);
 
 		stage = new Stage();
 		skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
@@ -36,23 +39,42 @@ public class Hud {
 		table.top().left();
 
 		dotsLeftLabel = new Label("", skin);
+		dotsLeftLabel.setFontScale(0.5f);
 		table.add(dotsLeftLabel).pad(10).expandX().fillX();
 
-		table.row();
+		levelLabel = new Label("Level " + (screen.game.mapManager.getLevelIndex(screen.map)+1), skin);
+		levelLabel.setFontScale(0.5f);
+		table.add(levelLabel).pad(10).expandX().fillX();
+
+		timeLabel = new Label("5s left", skin);
+		timeLabel.setFontScale(0.5f);
+		table.add(timeLabel).pad(10).expandX().fillX();
+
+		midTable = new Table();
+		midTable.setFillParent(true);
+		midTable.top().left().center();
+
 
 		winLoseLabel = new Label("", skin);
 		winLoseLabel.setVisible(true);
 
-		table.add(winLoseLabel).center().expand().center();
+		midTable.add(winLoseLabel).expand();
 
 		stage.addActor(table);
+		stage.addActor(midTable);
 	}
 
 	public void update(float delta) {
-		dotsLeftLabel.setText(screen.dotsLeft + "");
 		viewport.apply();
+		dotsLeftLabel.setText(screen.dotsLeft + " orbs left");
+		timeLabel.setText(Math.round(screen.timeLeft * 100f)/100f + "s left");
 		stage.act(delta);
 		stage.draw();
 	}
 
+	@Override
+	public void dispose() {
+		stage.dispose();
+		skin.dispose();
+	}
 }

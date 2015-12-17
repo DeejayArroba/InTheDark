@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import djarroba.ludumdare34.MyGame;
 import djarroba.ludumdare34.level.Level;
-import djarroba.ludumdare34.level.LevelManager;
 
 public class MenuScreen implements Screen {
 
@@ -24,12 +23,8 @@ public class MenuScreen implements Screen {
 	Skin skin;
 	Table baseTable;
 
-	public LevelManager levelManager;
 
 	public MenuScreen(final MyGame game) {
-		levelManager = new LevelManager(game);
-		// Load the actual levels into the LevelManager
-		levelManager.add(new Level(game.assets.get("levels/level1.tmx", TiledMap.class)));
 
 		camera = new OrthographicCamera();
 
@@ -50,7 +45,7 @@ public class MenuScreen implements Screen {
 		baseTable.add(label).center().height(75).row();
 
 		final List list = new List(skin);
-		list.setItems(levelManager.getLevels().toArray());
+		list.setItems(game.mapManager.getMaps().toArray());
 		ScrollPane scrollPane = new ScrollPane(list, skin);
 		baseTable.add(scrollPane).expand().fill().row();
 
@@ -58,7 +53,7 @@ public class MenuScreen implements Screen {
 		textButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				game.setScreen(new GameScreen(game, (Level) list.getSelected()));
+				game.setScreen(new GameScreen(game, (TiledMap) list.getSelected()));
 			}
 		});
 		baseTable.add(textButton).height(100).fillX();

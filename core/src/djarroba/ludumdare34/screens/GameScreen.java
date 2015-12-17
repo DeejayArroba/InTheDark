@@ -9,12 +9,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import djarroba.ludumdare34.MyGame;
 import djarroba.ludumdare34.entities.EntityManager;
 import djarroba.ludumdare34.entities.Player;
@@ -30,7 +30,7 @@ public class GameScreen implements Screen {
 	public static float WORLD_WIDTH = 16;
 	public static float WORLD_HEIGHT = 9;
 
-	public FitViewport viewport;
+	public FillViewport viewport;
 	public OrthographicCamera camera;
 
 	public EntityManager entityManager;
@@ -41,14 +41,14 @@ public class GameScreen implements Screen {
 
 	public SpriteBatch batch;
 
-	public Level level;
+	public TiledMap map;
 
 	public Player player;
 
 	OrthogonalTiledMapRenderer mapRenderer;
 
 	boolean isCounting = false;
-	float timeLeft = 5;
+	public float timeLeft = 5;
 	public int dotsLeft = 0;
 
 	public boolean won = false;
@@ -56,14 +56,16 @@ public class GameScreen implements Screen {
 
 	Hud hud;
 
-	public GameScreen(MyGame game, Level level) {
+	public Level level;
+
+	public GameScreen(MyGame game, TiledMap map) {
 		this.game = game;
-		this.level = level;
+		this.map = map;
 
 		Gdx.input.setInputProcessor(null);
 
 		camera = new OrthographicCamera();
-		viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+		viewport = new FillViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
 		viewport.apply();
 		camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
 
@@ -80,7 +82,7 @@ public class GameScreen implements Screen {
 		entityManager = new EntityManager();
 
 		// Setup the level
-		level.load(this);
+		level = new Level(map, this);
 		dotsLeft = level.dots.size();
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getMap(), 1 / Units.PPU);
 
@@ -88,7 +90,6 @@ public class GameScreen implements Screen {
 		entityManager.add(player);
 
 		hud = new Hud(this);
-
 	}
 
 	@Override
@@ -98,7 +99,6 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-
 		entityManager.cleanUp();
 
 		if(isCounting) {
@@ -117,11 +117,11 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		world.step(1/60f, 6, 2);
+
 		camera.update();
 
 		entityManager.update(delta);
-
-		world.step(1/60f, 6, 2);
 
 		batch.setProjectionMatrix(camera.combined);
 
@@ -144,9 +144,18 @@ public class GameScreen implements Screen {
 
 		if(lost) {
 			if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-				game.setScreen(new GameScreen(game, new Level(level.getMap())));
+				//reset();
+				game.setScreen(new GameScreen(game, map));
+				System.gc();
 			}
 		}
+		if(won && nextMapExists()) {
+			if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+				game.setScreen(new GameScreen(game, game.mapManager.getMaps().get(nextMapIndex())));
+				System.gc();
+			}
+		}
+
 	}
 
 	@Override
@@ -184,7 +193,11 @@ public class GameScreen implements Screen {
 	public void win() {
 		if(!won && !lost) {
 			won = true;
-			hud.winLoseLabel.setText("You win");
+			if(nextMapExists()) {
+				hud.winLoseLabel.setText("         You win\n[SPACE] for the next level");
+			} else {
+				hud.winLoseLabel.setText("   You beat the game!\nGo do something else now.");
+			}
 			game.assets.get("sounds/win1.wav", Sound.class).play();
 			end();
 		}
@@ -200,7 +213,26 @@ public class GameScreen implements Screen {
 	}
 
 	private void end() {
+		isCounting = false;
+	}
 
+	private int nextMapIndex() {
+		return game.mapManager.getLevelIndex(map)+1;
+	}
+
+	private boolean nextMapExists() {
+		return game.mapManager.getMaps().size() > nextMapIndex();
+	}
+
+	private void reset() {
+		entityManager.removeAll();
+		rayHandler.removeAll();
+
+		level.reset();
+		dotsLeft = level.dots.size();
+
+		player = new Player(this);
+		entityManager.add(player);
 	}
 
 }

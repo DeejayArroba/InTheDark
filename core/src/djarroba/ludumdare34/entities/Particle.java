@@ -87,8 +87,8 @@ public class Particle implements Entity {
 
 	@Override
 	public void onRemove(EntityManager entityManager) {
+		light.remove(true);
 		screen.world.destroyBody(body);
-		light.remove();
 	}
 
 	@Override

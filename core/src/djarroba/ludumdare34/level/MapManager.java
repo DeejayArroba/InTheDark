@@ -19,7 +19,7 @@ public class MapManager {
 		maps.add(map);
 	}
 
-	public ArrayList<TiledMap> getLevels() {
+	public ArrayList<TiledMap> getMaps() {
 		return maps;
 	}
 

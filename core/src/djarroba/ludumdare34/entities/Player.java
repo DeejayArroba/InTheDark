@@ -5,14 +5,12 @@ import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import djarroba.ludumdare34.screens.GameScreen;
 import djarroba.ludumdare34.units.Units;
@@ -138,7 +136,7 @@ public class Player implements Entity {
 		/*
 		Shoot projectiles
 		 */
-		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+		if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
 			if (canShoot()) {
 				shoot();
 			}

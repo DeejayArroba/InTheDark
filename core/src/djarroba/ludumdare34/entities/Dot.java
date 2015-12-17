@@ -58,7 +58,8 @@ public class Dot implements Entity {
 	public void onRemove(EntityManager entityManager) {
 		if(!screen.world.isLocked())
 			screen.world.destroyBody(body);
-		light.remove();
+		if (light != null)
+			light.remove();
 		screen.level.dots.remove(this);
 	}
 
